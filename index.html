@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>はいれつへんかん！</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="../Brython/brython.js"></script>
+</head>
+<body onload="brython()">
+	<header>
+		<h1 class="headline">
+			<a>はいれつへんかん！！！</a>
+		</h1>
+	</header>
+
+	<div id="a1">
+		<a1_h1>変換前データ</a1_h1>
+		<br>
+		<br>
+		</select>
+		<br>
+		<textarea id="b_convertText" rows="7" cols="80" placeholder="例: 011100101000111"></textarea>
+		<br>
+		<select id="cell">
+		</select>
+		<br>
+		<div id="data_options">
+			<div id="data_option0">
+			<input type="radio" name="data_option" value="0" checked>何も足さない 何も引かない
+			</div>
+			<div id="data_option1">
+			<input type="radio" name="data_option" value="1">"で囲む
+			</div>
+			<div id="data_option2">
+			<input type="radio" name="data_option" value="2">'で囲む
+			</div>
+		</div>
+		<button type="button" id="convertButton">こんばーと！</button>
+		<br>
+		<textarea id="a_convertText" rows="7" cols="80" placeholder="完成例: { 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1 }"></textarea>
+
+		<script type="text/python">
+			from browser import document, alert
+			
+			vals = ['C/C++/C#', 'Python']
+			cell = document["cell"]
+			bef = document["b_convertText"]
+			aft = document["a_convertText"]
+
+			def convertMain(e):
+				if bef.value == '':
+					alert("データを入力してください")
+					return
+				nl = False
+				for c in bef.value:
+					if c == '\n':
+						nl = True
+						break
+				if cell.value == vals[0]:
+					aft.text = C4C(bef.value, nl)
+				elif cell.value == vals[1]:
+					aft.text = C4Py(bef.value)
+			
+			def C4C(data, flag):
+				enc = '{'
+				if flag == True:
+					enc += '\n	{ '
+					for c in data:
+						if c == '\n':
+							enc = enc[:-2]
+							enc += ' },\n	{ '
+						else:
+							enc += c + ', '
+					enc = enc[:-2]
+					enc += ' }\n}'
+				elif flag == False:
+					enc += ' '
+					for c in data:
+						enc += c + ', '
+					enc = enc[:-2]
+					enc += ' }'
+				return enc
+			def C4Py(data):
+				alert("py")
+				return data
+			
+			convertButton = document["convertButton"]
+			convertButton.bind("click", convertMain)
+
+			for value in vals:
+				opt = document.createElement('option')
+				opt.text = str(value)
+				cell.appendChild(opt)
+		</script>
+	</div>
+</body>
+</html>
