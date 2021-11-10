@@ -24,17 +24,17 @@
 		<select id="cell">
 		</select>
 		<br>
-		<div id="data_options">
+		<article class="data_options">
 			<div id="data_option0">
-			<input type="radio" name="data_option" value="0" checked>何も足さない 何も引かない
+			<input type="radio" name="data_option" id="dtop_none" value="0" checked>何も足さない 何も引かない
 			</div>
 			<div id="data_option1">
-			<input type="radio" name="data_option" value="1">"で囲む
+			<input type="radio" name="data_option" id="dtop_wq" value="1">"で囲む
 			</div>
 			<div id="data_option2">
-			<input type="radio" name="data_option" value="2">'で囲む
+			<input type="radio" name="data_option" id="dtop_q" value="2">'で囲む
 			</div>
-		</div>
+		</article>
 		<button type="button" id="convertButton">こんばーと！</button>
 		<br>
 		<textarea id="a_convertText" rows="7" cols="80" placeholder="完成例: { 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1 }"></textarea>
@@ -44,6 +44,7 @@
 			
 			vals = ['C/C++/C#', 'Python']
 			cell = document["cell"]
+			
 			bef = document["b_convertText"]
 			aft = document["a_convertText"]
 
@@ -51,17 +52,26 @@
 				if bef.value == '':
 					alert("データを入力してください")
 					return
+
+				addC = ''
+				if document["dtop_none"].checked == True:
+					addC = ''
+				elif document["dtop_wq"].checked == True:
+					addC = '"'
+				elif document["dtop_q"].checked == True:
+					addC = "'"
+
 				nl = False
 				for c in bef.value:
 					if c == '\n':
 						nl = True
 						break
 				if cell.value == vals[0]:
-					aft.text = C4C(bef.value, nl)
+					aft.text = C4C(bef.value, addC, nl)
 				elif cell.value == vals[1]:
 					aft.text = C4Py(bef.value)
 			
-			def C4C(data, flag):
+			def C4C(data, addC, flag):
 				enc = '{'
 				if flag == True:
 					enc += '\n	{ '
@@ -70,13 +80,13 @@
 							enc = enc[:-2]
 							enc += ' },\n	{ '
 						else:
-							enc += c + ', '
+							enc += addC + c + addC + ', '
 					enc = enc[:-2]
 					enc += ' }\n}'
 				elif flag == False:
 					enc += ' '
 					for c in data:
-						enc += c + ', '
+						enc += addC + c + addC + ', '
 					enc = enc[:-2]
 					enc += ' }'
 				return enc

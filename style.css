@@ -39,18 +39,18 @@ select {
 	border:		1px solid	#ccc;
 }
 
-#data_options {
-	margin:	0	auto;
-	text-align:	center;
+.data_options {
+	padding: 10px 10px 20px;
 }
 #data_option0 {
-	text-align:	left;
+	padding:	0 0 0 142px;
+	text-align:	center;
 }
 #data_option1 {
-	text-align:	left;
+	text-align:	center;
 }
 #data_option2 {
-	text-align:	left;
+	text-align:	center;
 }
 
 button {
