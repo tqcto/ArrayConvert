@@ -91,8 +91,23 @@
 					enc += ' }'
 				return enc
 			def C4Py(data):
-				alert("py")
-				return data
+				enc = '['
+				if flag == True:
+					enc += '['
+					for c in data:
+						if c == '\n':
+							enc = enc[:-2]
+							enc += '], ['
+						else:
+							enc += addC + c + addC + ', '
+					enc = enc[:-2]
+					enc += ']]'
+				elif flag == False:
+					for c in data:
+						enc += addC + c + addC + ', '
+					enc = enc[:-2]
+					enc += ']'
+				return enc
 			
 			convertButton = document["convertButton"]
 			convertButton.bind("click", convertMain)
