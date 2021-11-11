@@ -69,7 +69,7 @@
 				if cell.value == vals[0]:
 					aft.text = C4C(bef.value, addC, nl)
 				elif cell.value == vals[1]:
-					aft.text = C4Py(bef.value)
+					aft.text = C4Py(bef.value, addC, nl)
 			
 			def C4C(data, addC, flag):
 				enc = '{'
@@ -90,7 +90,7 @@
 					enc = enc[:-2]
 					enc += ' }'
 				return enc
-			def C4Py(data):
+			def C4Py(data, addC, flag):
 				enc = '['
 				if flag == True:
 					enc += '['
