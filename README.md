@@ -1,6 +1,6 @@
 # 配列変換
 
-[![converter](https://img.shields.io/badge/converter-web-orange)](https://sca1d.github.io/ArrayConvert/)
+[![converter](https://img.shields.io/badge/converter-web-orange)](https://tqcto.github.io/ArrayConvert/)
 
 入力した数値・文字を配列に変換するツールです
 
